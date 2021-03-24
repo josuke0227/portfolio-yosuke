@@ -1,10 +1,13 @@
+
+
+
 export const data = [
   {
-    title: "Hello World",
-    subtitie: "Hello Next.js",
+    title: 'Hello World',
+    subtitle: 'Hello World Subtitle'
   },
   {
-    title: "Hello Australia",
-    subtitie: "Hello Moon",
-  },
-];
+    title: 'Hello World 2',
+    subtitle: 'Hello World Subtitle 2'
+  }
+]

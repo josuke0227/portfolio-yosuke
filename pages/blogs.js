@@ -1,18 +1,15 @@
-import React from "react";
-import BaseLayout from "@/components/layouts/BaseLayout";
-import BasePage from "@/components/BasePage";
-import { useUser } from "@auth0/nextjs-auth0";
+
+import BaseLayout from '@/components/layouts/BaseLayout';
+import BasePage from '@/components/BasePage';
 
 const Blogs = () => {
-  const { user, isLoading } = useUser();
-
   return (
-    <BaseLayout user={user} loading={isLoading}>
+    <BaseLayout>
       <BasePage>
-        <h1>I am blogs page.</h1>
+        <h1>I am Blog Page</h1>
       </BasePage>
     </BaseLayout>
-  );
-};
+  )
+}
 
 export default Blogs;

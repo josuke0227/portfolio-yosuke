@@ -1,18 +1,16 @@
-import React from "react";
-import BaseLayout from "@/components/layouts/BaseLayout";
-import BasePage from "@/components/BasePage";
-import { useUser } from "@auth0/nextjs-auth0";
 
-const CV = () => {
-  const { user, isLoading } = useUser();
 
+import BaseLayout from '@/components/layouts/BaseLayout';
+import BasePage from '@/components/BasePage';
+
+const Cv = () => {
   return (
-    <BaseLayout user={user} loading={isLoading}>
+    <BaseLayout>
       <BasePage>
-        <h1>I am CV page.</h1>
+        <h1>I am Cv Page</h1>
       </BasePage>
     </BaseLayout>
-  );
-};
+  )
+}
 
-export default CV;
+export default Cv;

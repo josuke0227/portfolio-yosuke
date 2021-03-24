@@ -1,14 +1,16 @@
-@import "./shared/fnots";
-// Pages
-@import "./index";
-// Components
-@import "./components/header";
 
-html,
-body {
+@import './shared/fonts';
+
+// Components
+@import './components/header';
+
+// Pages
+@import './index';
+
+html, body {
   height: 100%;
   width: 100%;
-  font-family: "Montserrat", "Helvetica" !important;
+  font-family: 'Montserrat', 'Helvetica' !important;
 }
 
 .clickable {
@@ -16,14 +18,13 @@ body {
 }
 
 .base-page {
-  padding: 150px;
+  padding-top: 150px;
   color: white;
 }
 
-// Used bootstrap utility class "posotion-absolute"
-// .absolute {
-//   position: absolute;
-// }
+.absolute {
+  position: absolute;
+}
 
 .self-typed {
   font-size: 31px;

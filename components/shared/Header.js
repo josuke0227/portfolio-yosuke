@@ -1,78 +1,78 @@
-import React, { useState } from "react";
-import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from "reactstrap";
 
-import Link from "next/link";
+import React, { useState } from 'react';
+import Link from 'next/link';
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  Nav,
+  NavItem
+} from 'reactstrap';
 
-const BsNavLink = ({ title, href }) => (
-  <Link href={href}>
-    <a className="nav-link port-navbar-link">{title}</a>
-  </Link>
-);
 
-const BsNavBrand = () => (
+const BsNavLink = props => {
+  const { href, title } = props;
+  return (
+    <Link href={href}>
+      <a className="nav-link port-navbar-link">{title}</a>
+    </Link>
+  )
+}
+
+const BsNavBrand = () =>
   <Link href="/">
-    <a className="port-navbar-brand navbar-brand">Yosuke Motosugi</a>
+    <a className="navbar-brand port-navbar-brand">Filip Jerga</a>
   </Link>
-);
 
-const LoginLink = () => <BsNavLink href="/api/auth/login" title="login" />;
+const LoginLink = () =>
+  <span className="nav-link port-navbar-link clickable">Login</span>
 
-const LogoutLink = () => <BsNavLink href="/api/auth/logout" title="logout" />;
+const LogoutLink = () =>
+  <span className="nav-link port-navbar-link clickable">Logout</span>
 
-const Header = ({ user, loading }) => {
+const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <Navbar
-      className="port-navbar port-default position-absolute"
-      color="transparent"
-      dark
-      expand="md"
-    >
-      <BsNavBrand />
-      <NavbarToggler onClick={toggle} />
-      <Collapse isOpen={isOpen} navbar>
-        <Nav className="mr-auto" navbar>
-          <NavItem className="port-navbar-item">
-            <BsNavLink href="/" title="Home" />
-          </NavItem>
-          <NavItem className="port-navbar-item">
-            <BsNavLink href="/about" title="About" />
-          </NavItem>
-          <NavItem className="port-navbar-item">
-            <BsNavLink href="/portfolios" title="Portfolios" />
-          </NavItem>
-          <NavItem className="port-navbar-item">
-            <BsNavLink href="/blogs" title="Blogs" />
-          </NavItem>
-          <NavItem className="port-navbar-item">
-            <BsNavLink href="/cv" title="CV" />
-          </NavItem>
-          <NavItem className="port-navbar-item">
-            <BsNavLink href="/secret" title="Secret" />
-          </NavItem>
-        </Nav>
-        <Nav navbar>
-          {!loading && (
-            <>
-              {user && (
-                <NavItem className="port-navbar-item">
-                  <LogoutLink />
-                </NavItem>
-              )}
-              {!user && (
-                <NavItem className="port-navbar-item">
-                  <LoginLink />
-                </NavItem>
-              )}
-            </>
-          )}
-        </Nav>
-      </Collapse>
-    </Navbar>
+    <div>
+      <Navbar
+        className="port-navbar port-default absolute"
+        color="transparent"
+        dark
+        expand="md">
+        <BsNavBrand />
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="mr-auto" navbar>
+            <NavItem className="port-navbar-item">
+              <BsNavLink href="/" title="Home"/>
+            </NavItem>
+            <NavItem className="port-navbar-item">
+              <BsNavLink href="/about" title="About"/>
+            </NavItem>
+            <NavItem className="port-navbar-item">
+              <BsNavLink href="/portfolios" title="Portfolios"/>
+            </NavItem>
+            <NavItem className="port-navbar-item">
+              <BsNavLink href="/blogs" title="Blogs"/>
+            </NavItem>
+            <NavItem className="port-navbar-item">
+              <BsNavLink href="/cv" title="Cv"/>
+            </NavItem>
+          </Nav>
+          <Nav navbar>
+            <NavItem className="port-navbar-item">
+              <LoginLink />
+            </NavItem>
+            <NavItem className="port-navbar-item">
+              <LogoutLink />
+            </NavItem>
+          </Nav>
+        </Collapse>
+      </Navbar>
+    </div>
   );
-};
+}
 
 export default Header;
