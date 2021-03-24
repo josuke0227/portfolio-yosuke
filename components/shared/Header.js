@@ -15,13 +15,11 @@ const BsNavBrand = () => (
   </Link>
 );
 
-const LoginLink = () => <BsNavLink href="/api/v1/login" title="login" />;
+const LoginLink = () => <BsNavLink href="/api/auth/login" title="login" />;
 
-const LogoutLink = () => (
-  <span className="nav-link port-navbar-link clickable">Logout</span>
-);
+const LogoutLink = () => <BsNavLink href="/api/auth/logout" title="logout" />;
 
-const Header = () => {
+const Header = ({ user, loading }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -52,14 +50,25 @@ const Header = () => {
           <NavItem className="port-navbar-item">
             <BsNavLink href="/cv" title="CV" />
           </NavItem>
+          <NavItem className="port-navbar-item">
+            <BsNavLink href="/secret" title="Secret" />
+          </NavItem>
         </Nav>
-        <Nav>
-          <NavItem className="port-navbar-item">
-            <LoginLink />
-          </NavItem>
-          <NavItem className="port-navbar-item">
-            <LogoutLink />
-          </NavItem>
+        <Nav navbar>
+          {!loading && (
+            <>
+              {user && (
+                <NavItem className="port-navbar-item">
+                  <LogoutLink />
+                </NavItem>
+              )}
+              {!user && (
+                <NavItem className="port-navbar-item">
+                  <LoginLink />
+                </NavItem>
+              )}
+            </>
+          )}
         </Nav>
       </Collapse>
     </Navbar>

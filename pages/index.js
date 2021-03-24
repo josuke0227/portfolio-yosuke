@@ -1,6 +1,7 @@
 import BaseLayout from "@/components/layouts/BaseLayout";
 import { Container, Row, Col } from "reactstrap";
 import Typed from "react-typed";
+import { useUser } from "@auth0/nextjs-auth0";
 
 const ROLES = [
   "Developer",
@@ -12,8 +13,10 @@ const ROLES = [
 ];
 
 const Index = () => {
+  const { user, isLoading } = useUser();
+
   return (
-    <BaseLayout className="cover">
+    <BaseLayout user={user} isLoading={isLoading} className="cover">
       <div className="main-section">
         <div className="background-image">
           <img src="/images/background-index.png" />

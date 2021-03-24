@@ -1,18 +1,16 @@
 import React from "react";
 import BaseLayout from "@/components/layouts/BaseLayout";
 import BasePage from "@/components/BasePage";
-import { useUser } from "@auth0/nextjs-auth0";
+import withAuth from "@/hoc/withAuth";
 
-const About = () => {
-  const { user, isLoading } = useUser();
-
+const Secret = ({ user, isLoading }) => {
   return (
     <BaseLayout user={user} isLoading={isLoading}>
       <BasePage>
-        <h1>I am About page.</h1>
+        <h1>I am Secret page.</h1>
       </BasePage>
     </BaseLayout>
   );
 };
 
-export default About;
+export default withAuth(Secret);

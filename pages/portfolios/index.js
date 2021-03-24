@@ -2,9 +2,11 @@ import BaseLayout from "@/components/layouts/BaseLayout";
 import BasePage from "@/components/BasePage";
 import Link from "next/link";
 import { useGetPosts } from "@/actions";
+import { useUser } from "@auth0/nextjs-auth0";
 
 const Portfolios = () => {
   const { data, error, loading } = useGetPosts();
+  const { user, isLoading } = useUser();
 
   const renderPosts = (posts) => {
     return posts.map((post) => (
@@ -17,7 +19,7 @@ const Portfolios = () => {
   };
 
   return (
-    <BaseLayout>
+    <BaseLayout user={user} isLoading={isLoading}>
       <BasePage>
         {loading && <p>Loading...</p>}
         {error && <div className="alert alert-danger">{error.message}</div>}

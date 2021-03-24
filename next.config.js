@@ -1,5 +1,4 @@
 // import files using relative path
-
 const path = require("path");
 
 module.exports = {
