@@ -1,38 +1,34 @@
 import React from "react";
 import BaseLayout from "@/components/layouts/BaseLayout";
 import BasePage from "@/components/BasePage";
-import { withAuth } from "../util/auth0";
+import { getSession } from "@auth0/nextjs-auth0";
 
-const SecretSSR = ({ user, title }) => {
+const SecretSSR = ({ user }) => {
   return (
     <BaseLayout user={user} isLoading={false}>
       <BasePage>
         <h1>I am Secret page. Hello-{user && user.name}</h1>
-        <h2>{title}</h2>
       </BasePage>
     </BaseLayout>
   );
 };
 
-// export const getServerSideProps = async ({ req, res }) => {
-//   const user = await authorizeUser(req, res);
+export const getServerSideProps = async ({ req, res }) => {
+  const session = await getSession(req, res);
 
-//   return {
-//     props: { user },
-//   };
-// };
+  if (!session || !session.user) {
+    res.writeHead(302, { Location: "/api/auth/login" });
+    res.end();
+    return {
+      props: {},
+    };
+  }
 
-const getTitle = () => {
-  return new Promise((res) => {
-    setTimeout(() => {
-      res({ title: "My new title!" });
-    }, 500);
-  });
+  console.log(session.user);
+
+  return {
+    props: { user: session.user },
+  };
 };
-
-export const getServerSideProps = withAuth(async ({ req, res }, user) => {
-  const title = await getTitle();
-  return title;
-});
 
 export default SecretSSR;
