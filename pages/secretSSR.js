@@ -1,7 +1,7 @@
 import React from "react";
 import BaseLayout from "@/components/layouts/BaseLayout";
 import BasePage from "@/components/BasePage";
-import { getSession } from "@auth0/nextjs-auth0";
+import { authorizeUser } from "../util/auth0";
 
 const SecretSSR = ({ user }) => {
   return (
@@ -14,20 +14,10 @@ const SecretSSR = ({ user }) => {
 };
 
 export const getServerSideProps = async ({ req, res }) => {
-  const session = await getSession(req, res);
-
-  if (!session || !session.user) {
-    res.writeHead(302, { Location: "/api/auth/login" });
-    res.end();
-    return {
-      props: {},
-    };
-  }
-
-  console.log(session.user);
+  const user = await authorizeUser(req, res);
 
   return {
-    props: { user: session.user },
+    props: { user },
   };
 };
 
