@@ -1,18 +1,18 @@
-import Redirect from "@/components/shared/Redirect";
-
-import { useUser } from "@auth0/nextjs-auth0";
+import { useGetUser } from "../actions/user";
+import Redirect from "../components/shared/Redirect";
 
 const withAuth = (Component) => {
   return (props) => {
-    const { user, isLoading } = useUser();
-    if (isLoading) {
-      return <p>Loading...</p>;
+    const { data, loading } = useGetUser();
+
+    if (loading) {
+      return <p> Loading... </p>;
     }
 
-    if (!user) {
-      return <Redirect ssr to="/api/auth/login" />;
+    if (!data) {
+      return <Redirect to="/api/v1/login" ssr />;
     } else {
-      return <Component user={user} loading={isLoading} {...props} />;
+      return <Component user={data} loadin={loading} {...props} />;
     }
   };
 };
