@@ -13,3 +13,16 @@ const auth0 = initAuth0({
 });
 
 export default auth0;
+
+export const authorizeUser = async (req, res) => {
+  const session = await auth0.getSession(req);
+  if (!session || !session.user) {
+    res.writeHead(302, {
+      location: "/api/v1/login",
+    });
+    res.end();
+    return null;
+  }
+
+  return session.user;
+};
